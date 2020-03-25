@@ -1,8 +1,9 @@
 'use strict';
 
-function getDogImage(input) {
+function getDogImage(input,breed) {
   console.log(input);
-  fetch(`https://dog.ceo/api/breeds/image/random/${input}`)
+  console.log(breed);
+  fetch(`https://dog.ceo/api/breed/${breed}/image/random/${input}`)
     .then(response => response.json())
     .then(responseJson => 
       displayResults(responseJson))
@@ -12,8 +13,9 @@ function getDogImage(input) {
 
 function displayResults(responseJson) {
   console.log(responseJson);
-
+  
   let imgArr= [];
+  //console.log(responseJson.status);
     responseJson.message.forEach(event=>{
         imgArr.push(`<img src="${event}" class="results-img">`);
   });
@@ -43,7 +45,7 @@ function displayResults(responseJson) {
 function watchForm() {
   $('form').submit(event => {
     event.preventDefault();
-    getDogImage($('input').val());
+    getDogImage($('.numuber-dog-entry').val(),$('.breed-dog-entry').val());
   });
 }
 
