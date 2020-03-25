@@ -3,11 +3,11 @@
 function getDogImage(input,breed) {
   console.log(input);
   console.log(breed);
-  fetch(`https://dog.ceo/api/breed/${breed}/image/random/${input}`)
+  fetch(`https://dog.ceo/api/breed/${breed}/images/random/${input}`)
     .then(response => response.json())
     .then(responseJson => 
       displayResults(responseJson))
-    .catch(error => console.log('Something went wrong. Try again later',error));
+    .catch(error => alert('The breed is not found. Try again later'));
 }
 
 
@@ -15,28 +15,11 @@ function displayResults(responseJson) {
   console.log(responseJson);
   
   let imgArr= [];
-  //console.log(responseJson.status);
     responseJson.message.forEach(event=>{
         imgArr.push(`<img src="${event}" class="results-img">`);
   });
 
-//   let statusArr= [];
-//   responseJson.status.forEach(event=>{
-//     console.log(event);
-//     statusArr.push(`<p>${event}</p>`);
-// });
-
-// let messageArr=statusArr.join('');
-
-//     let messageArr= [];
-//     for(i=0;i<statusArr.length;i++){
-//     messageArr.push(imgArr[i]);
-//     messageArr.push(statusArr[i]);
-// }
-    let messageArr= imgArr.join('');
-
-
-  $('.results').html(`${messageArr}`);
+  $('.results').html(`${imgArr.join('')}`);
 
   //display the results section
   $('.results').removeClass('hidden');
